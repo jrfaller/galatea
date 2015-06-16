@@ -16,9 +16,7 @@
 
 package fr.labri.galatea;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 public class Concept {
 
@@ -148,7 +146,17 @@ public class Concept {
 	}
 	
 	public String toString() {
-		return "(" + getIntent().toString() + "," + getExtent().toString() + ")";
+		List<String> intent = new ArrayList<>();
+		for (Attribute a : getIntent())
+			intent.add(a.toString());
+		Collections.sort(intent);
+
+		List<String> extent = new ArrayList<>();
+		for (Entity e : getExtent())
+			extent.add(e.toString());
+		Collections.sort(extent);
+
+		return "(" + intent.toString() + "," + extent.toString() + ")";
 	}
 	
 	public int hashCode() {

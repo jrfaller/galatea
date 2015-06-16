@@ -63,27 +63,51 @@ public class Samples {
         return c;
     }
 
-    public static Set<String> sampleOrder1() {
+    public static Set<String> sampleGsh1() {
         return new HashSet<>(Arrays.asList(
-            new String[] {
-                    "([b],[1, 2, 3])",
-                    "([c],[1, 2, 5])",
-                    "([a, h],[2, 3, 6])",
-                    "([d],[1, 4, 5])",
-                    "([c, d],[5])",
-                    "([d, e],[1, 4])",
-                    "([b, c, d, e],[1])",
-                    "([a, b, g, h],[2, 3])",
-                    "([a, b, c, g, h],[2])",
-                    "([a, b, f, g, h],[3])"
-            }
+                new String[] {
+                        "([a, h],[2, 3, 6]) 0 1",
+                        "([b],[1, 2, 3]) 0 2",
+                        "([c],[1, 2, 5]) 0 2",
+                        "([d],[1, 4, 5]) 0 2",
+                        "([a, b, g, h],[2, 3]) 2 2",
+                        "([c, d],[1, 5]) 2 1",
+                        "([d, e],[1, 4]) 1 1",
+                        "([a, b, f, g, h],[3]) 1 0",
+                        "([a, b, c, g, h],[2]) 2 0",
+                        "([b, c, d, e],[1]) 3 0",
+                }
+        ));
+    }
+
+    public static Set<String> sampleLattice1() {
+        return new HashSet<>(Arrays.asList(
+                new String[] {
+                        "([],[1, 2, 3, 4, 5, 6]) 0 4",
+
+                        "([a, h],[2, 3, 6]) 1 1",
+                        "([b],[1, 2, 3]) 1 2",
+                        "([c],[1, 2, 5]) 1 2",
+                        "([d],[1, 4, 5]) 1 2",
+
+                        "([a, b, g, h],[2, 3]) 2 2",
+                        "([b, c],[1, 2]) 2 2",
+                        "([c, d],[1, 5]) 2 1",
+                        "([d, e],[1, 4]) 1 1",
+
+                        "([a, b, f, g, h],[3]) 1 1",
+                        "([a, b, c, g, h],[2]) 2 1",
+                        "([b, c, d, e],[1]) 3 1",
+
+                        "([a, b, c, d, e, f, g, h],[]) 3 0",
+                }
         ));
     }
 
     public static Set<String> conceptOrderHash(ConceptOrder o) {
         Set<String> hash = new HashSet<>();
         for (Concept c : o)
-            hash.add(c.toString());
+            hash.add(c.toString() + " " + c.getParents().size() + " " + c.getChildren().size());
         return hash;
     }
 
