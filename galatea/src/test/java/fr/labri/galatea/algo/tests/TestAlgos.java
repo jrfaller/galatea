@@ -23,8 +23,8 @@ public class TestAlgos {
 		a.compute();
 		ConceptOrder o = a.getConceptOrder();
 		assertTrue(o.getConcepts().size() == 10);
-	}
 
+	}
 	@Test
 	public void testCeres() throws IOException {
 		ParseCSVContext p = new ParseCSVContext("target/test-classes/gsh.csv");

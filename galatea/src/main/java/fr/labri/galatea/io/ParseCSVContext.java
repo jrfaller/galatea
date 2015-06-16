@@ -21,11 +21,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import au.com.bytecode.opencsv.CSVReader;
+
 import fr.labri.galatea.Attribute;
 import fr.labri.galatea.Context;
 import fr.labri.galatea.Entity;
-
-import au.com.bytecode.opencsv.CSVReader;
 
 public class ParseCSVContext  extends ParseContext {
 
