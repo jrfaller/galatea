@@ -1,18 +1,16 @@
 package fr.labri.galatea.algo.tests;
 
-import fr.labri.galatea.Attribute;
-import fr.labri.galatea.BinaryAttribute;
-import fr.labri.galatea.Context;
-import fr.labri.galatea.Entity;
+import fr.labri.galatea.*;
 
-/**
- * Created by falleri on 16/06/15.
- */
-public class SampleContexts {
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
-    private SampleContexts() {}
+public class Samples {
 
-    public static Context createSampleContext1() {
+    private Samples() {}
+
+    public static Context sampleContext1() {
         Context c = new Context();
         Attribute aa = new BinaryAttribute("a");
         Attribute ab = new BinaryAttribute("b");
@@ -61,8 +59,32 @@ public class SampleContexts {
         c.addPair(e5, ac);
         c.addPair(e5, ad);
         c.addPair(e6, aa);
-        c.addPair(e5, ah);
+        c.addPair(e6, ah);
         return c;
+    }
+
+    public static Set<String> sampleOrder1() {
+        return new HashSet<>(Arrays.asList(
+            new String[] {
+                    "([b],[1, 2, 3])",
+                    "([c],[1, 2, 5])",
+                    "([a, h],[2, 3, 6])",
+                    "([d],[1, 4, 5])",
+                    "([c, d],[5])",
+                    "([d, e],[1, 4])",
+                    "([b, c, d, e],[1])",
+                    "([a, b, g, h],[2, 3])",
+                    "([a, b, c, g, h],[2])",
+                    "([a, b, f, g, h],[3])"
+            }
+        ));
+    }
+
+    public static Set<String> conceptOrderHash(ConceptOrder o) {
+        Set<String> hash = new HashSet<>();
+        for (Concept c : o)
+            hash.add(c.toString());
+        return hash;
     }
 
 }
