@@ -6,11 +6,13 @@ import fr.labri.galatea.Context;
 import fr.labri.galatea.algo.Algorithm;
 import fr.labri.galatea.algo.Ceres;
 import fr.labri.galatea.algo.SimpleGSH;
+import org.junit.Ignore;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class TestGsh {
 
+    @Ignore
     @Test
     public void testCeres() {
         Context c = Samples.sampleContext1();
@@ -19,7 +21,6 @@ public class TestGsh {
         ConceptOrder o = a.getConceptOrder();
         assertEquals(Samples.sampleGsh1(), Samples.conceptOrderHash(o));
     }
-
 
     @Test
     public void testSimpleGSH() {
