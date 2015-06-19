@@ -4,7 +4,7 @@
 
 	<groupId>fr.labri.galatea</groupId>
 	<artifactId>galatea</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>galatea</name>
