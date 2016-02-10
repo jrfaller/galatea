@@ -14,7 +14,7 @@
    limitations under the License.
 */
 
-package fr.labri.galatea.io.tests;
+package fr.labri.galatea.io;
 
 import java.io.IOException;
 

@@ -14,42 +14,54 @@
    limitations under the License.
 */
 
-package fr.labri.galatea.tests;
+package fr.labri.galatea.misc;
 
 import java.io.IOException;
 
-import fr.labri.galatea.algo.AddExtent;
+import fr.labri.galatea.ConceptOrder;
+import fr.labri.galatea.Context;
 import fr.labri.galatea.algo.Algorithm;
 import fr.labri.galatea.algo.SimpleGSH;
+import fr.labri.galatea.io.GenerateCOD;
+import fr.labri.galatea.io.ParseCOD;
 import fr.labri.galatea.io.ParseCSVContext;
 import fr.labri.galatea.io.GenerateDot;
 import fr.labri.galatea.io.GenerateHTML;
 
-public class TestCeres {
+public class TestAllParsers {
 
 	public static void main(String[] args) throws IOException {
-		ParseCSVContext p = new ParseCSVContext("src/test/resources/gsh.csv");
-		p.parse();
-		GenerateHTML h = new GenerateHTML(p.getContext());
-		h.generateCode();
-		h.toFile("build/tmp/test.html");
+		String path = "src/test/resources/gsh.csv";
 		
-		Algorithm a1 = new SimpleGSH(p.getContext());
+		ParseCSVContext p = new ParseCSVContext(path);
+		p.parse();
+		Context c = p.getContext();
+		
+		System.out.println(c);
+		
+		GenerateHTML g1 = new GenerateHTML(c);
+		g1.generateCode();
+		g1.toFile("build/tmp/test.html");
+		
+		Algorithm a1 = new SimpleGSH(c);
 		a1.compute();
 		
-		System.out.println(a1.getConceptOrder());
+		ConceptOrder o = a1.getConceptOrder();
 		
-		GenerateDot d = new GenerateDot(a1.getConceptOrder());
-		d.generateCode();
-		d.toFile("build/tmp/test-gsh.dot");
+		GenerateCOD cod = new GenerateCOD(o);
+		cod.generateCode();
+		cod.toFile("build/tmp/cod.xml");
 		
-		AddExtent a2 = new AddExtent(p.getContext());
-		a2.compute();
-		d = new GenerateDot(a2.getConceptOrder());
-		d.generateCode();
-		d.toFile("build/tmp/test-lat.dot");
+		ParseCOD codp = new ParseCOD("build/tmp/cod.xml");
+		codp.parse();
 		
-		System.out.println(a2.getConceptOrder());
+		GenerateDot g2 = new GenerateDot(o);
+		g2.generateCode();
+		g2.toFile("build/tmp/test.dot");
+		
+		GenerateDot g3 = new GenerateDot(codp.getConceptOrder());
+		g3.generateCode();
+		g3.toFile("build/tmp/cod.dot");
 	}
 	
 }

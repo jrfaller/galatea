@@ -14,7 +14,7 @@
    limitations under the License.
 */
 
-package fr.labri.galatea.tests;
+package fr.labri.galatea.misc;
 
 import java.io.IOException;
 
@@ -22,46 +22,34 @@ import fr.labri.galatea.ConceptOrder;
 import fr.labri.galatea.Context;
 import fr.labri.galatea.algo.Algorithm;
 import fr.labri.galatea.algo.SimpleGSH;
-import fr.labri.galatea.io.GenerateCOD;
-import fr.labri.galatea.io.ParseCOD;
 import fr.labri.galatea.io.ParseCSVContext;
 import fr.labri.galatea.io.GenerateDot;
-import fr.labri.galatea.io.GenerateHTML;
+import fr.labri.galatea.io.GenerateLatex;
 
-public class TestAllParsers {
+public class TestDotGenerator {
 
 	public static void main(String[] args) throws IOException {
-		String path = "src/test/resources/gsh.csv";
+		String path ="src/test/resources/usability.csv";
 		
 		ParseCSVContext p = new ParseCSVContext(path);
 		p.parse();
 		Context c = p.getContext();
 		
-		System.out.println(c);
-		
-		GenerateHTML g1 = new GenerateHTML(c);
-		g1.generateCode();
-		g1.toFile("build/tmp/test.html");
-		
+		//Algorithm a1 = new AddExtent();
 		Algorithm a1 = new SimpleGSH(c);
 		a1.compute();
 		
 		ConceptOrder o = a1.getConceptOrder();
 		
-		GenerateCOD cod = new GenerateCOD(o);
-		cod.generateCode();
-		cod.toFile("build/tmp/cod.xml");
+		GenerateLatex lg = new GenerateLatex(c);
+		lg.generateCode();
+		lg.toFile("build/tmp/context.tex");
 		
-		ParseCOD codp = new ParseCOD("build/tmp/cod.xml");
-		codp.parse();
-		
-		GenerateDot g2 = new GenerateDot(o);
-		g2.generateCode();
-		g2.toFile("build/tmp/test.dot");
-		
-		GenerateDot g3 = new GenerateDot(codp.getConceptOrder());
-		g3.generateCode();
-		g3.toFile("build/tmp/cod.dot");
+		GenerateDot dg = new GenerateDot(o);
+		dg.setUseSimplifiedExtent(true);
+		dg.setUseSimplifiedIntent(true);
+		dg.generateCode();
+		dg.toFile("build/tmp/lattice.dot");
 	}
 	
 }

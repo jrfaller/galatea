@@ -14,42 +14,42 @@
    limitations under the License.
 */
 
-package fr.labri.galatea.tests;
+package fr.labri.galatea.misc;
 
 import java.io.IOException;
 
-import fr.labri.galatea.ConceptOrder;
-import fr.labri.galatea.Context;
+import fr.labri.galatea.algo.AddExtent;
 import fr.labri.galatea.algo.Algorithm;
 import fr.labri.galatea.algo.SimpleGSH;
 import fr.labri.galatea.io.ParseCSVContext;
 import fr.labri.galatea.io.GenerateDot;
-import fr.labri.galatea.io.GenerateLatex;
+import fr.labri.galatea.io.GenerateHTML;
 
-public class TestDotGenerator {
+public class TestCeres {
 
 	public static void main(String[] args) throws IOException {
-		String path ="src/test/resources/usability.csv";
-		
-		ParseCSVContext p = new ParseCSVContext(path);
+		ParseCSVContext p = new ParseCSVContext("src/test/resources/gsh.csv");
 		p.parse();
-		Context c = p.getContext();
+		GenerateHTML h = new GenerateHTML(p.getContext());
+		h.generateCode();
+		h.toFile("build/tmp/test.html");
 		
-		//Algorithm a1 = new AddExtent();
-		Algorithm a1 = new SimpleGSH(c);
+		Algorithm a1 = new SimpleGSH(p.getContext());
 		a1.compute();
 		
-		ConceptOrder o = a1.getConceptOrder();
+		System.out.println(a1.getConceptOrder());
 		
-		GenerateLatex lg = new GenerateLatex(c);
-		lg.generateCode();
-		lg.toFile("build/tmp/context.tex");
+		GenerateDot d = new GenerateDot(a1.getConceptOrder());
+		d.generateCode();
+		d.toFile("build/tmp/test-gsh.dot");
 		
-		GenerateDot dg = new GenerateDot(o);
-		dg.setUseSimplifiedExtent(true);
-		dg.setUseSimplifiedIntent(true);
-		dg.generateCode();
-		dg.toFile("build/tmp/lattice.dot");
+		AddExtent a2 = new AddExtent(p.getContext());
+		a2.compute();
+		d = new GenerateDot(a2.getConceptOrder());
+		d.generateCode();
+		d.toFile("build/tmp/test-lat.dot");
+		
+		System.out.println(a2.getConceptOrder());
 	}
 	
 }

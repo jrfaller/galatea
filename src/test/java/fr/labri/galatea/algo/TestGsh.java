@@ -1,11 +1,7 @@
-package fr.labri.galatea.algo.tests;
+package fr.labri.galatea.algo;
 
-import fr.labri.galatea.Concept;
 import fr.labri.galatea.ConceptOrder;
 import fr.labri.galatea.Context;
-import fr.labri.galatea.algo.Algorithm;
-import fr.labri.galatea.algo.Ceres;
-import fr.labri.galatea.algo.SimpleGSH;
 import org.junit.Ignore;
 import org.junit.Test;
 import static org.junit.Assert.*;

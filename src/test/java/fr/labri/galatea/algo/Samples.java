@@ -1,4 +1,4 @@
-package fr.labri.galatea.algo.tests;
+package fr.labri.galatea.algo;
 
 import fr.labri.galatea.*;
 
