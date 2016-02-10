@@ -1,5 +1,7 @@
 apply plugin: 'java'
 
+description = 'A FCA framework for Java'
+
 repositories {
 	mavenCentral()
 	jcenter()
