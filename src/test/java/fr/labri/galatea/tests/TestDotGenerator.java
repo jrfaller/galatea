@@ -29,7 +29,7 @@ import fr.labri.galatea.io.GenerateLatex;
 public class TestDotGenerator {
 
 	public static void main(String[] args) throws IOException {
-		String path ="target/test-classes/usability.csv";
+		String path ="src/test/resources/usability.csv";
 		
 		ParseCSVContext p = new ParseCSVContext(path);
 		p.parse();
@@ -43,13 +43,13 @@ public class TestDotGenerator {
 		
 		GenerateLatex lg = new GenerateLatex(c);
 		lg.generateCode();
-		lg.toFile("tmp/latex");
+		lg.toFile("build/tmp/context.tex");
 		
 		GenerateDot dg = new GenerateDot(o);
 		dg.setUseSimplifiedExtent(true);
 		dg.setUseSimplifiedIntent(true);
 		dg.generateCode();
-		dg.toFile("tmp/lattice.dot");
+		dg.toFile("build/tmp/lattice.dot");
 	}
 	
 }

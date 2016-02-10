@@ -28,11 +28,11 @@ import fr.labri.galatea.io.GenerateHTML;
 public class TestCeres {
 
 	public static void main(String[] args) throws IOException {
-		ParseCSVContext p = new ParseCSVContext("target/test-classes/gsh.csv");
+		ParseCSVContext p = new ParseCSVContext("src/test/resources/gsh.csv");
 		p.parse();
 		GenerateHTML h = new GenerateHTML(p.getContext());
 		h.generateCode();
-		h.toFile("tmp/test.html");
+		h.toFile("build/tmp/test.html");
 		
 		Algorithm a1 = new SimpleGSH(p.getContext());
 		a1.compute();
@@ -41,13 +41,13 @@ public class TestCeres {
 		
 		GenerateDot d = new GenerateDot(a1.getConceptOrder());
 		d.generateCode();
-		d.toFile("tmp/test-gsh.dot");
+		d.toFile("build/tmp/test-gsh.dot");
 		
 		AddExtent a2 = new AddExtent(p.getContext());
 		a2.compute();
 		d = new GenerateDot(a2.getConceptOrder());
 		d.generateCode();
-		d.toFile("tmp/test-lat.dot");
+		d.toFile("build/tmp/test-lat.dot");
 		
 		System.out.println(a2.getConceptOrder());
 	}
