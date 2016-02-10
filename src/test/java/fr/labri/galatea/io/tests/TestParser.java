@@ -31,7 +31,7 @@ public class TestParser {
 	
 	@Test
 	public void testContextParser() throws IOException {
-		ParseCSVContext p = new ParseCSVContext("target/test-classes/gsh.csv");
+		ParseCSVContext p = new ParseCSVContext("src/test/resources/gsh.csv");
 		p.parse();
 		Context ctx = p.getContext();
 		

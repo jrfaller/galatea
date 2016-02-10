@@ -31,7 +31,7 @@ import fr.labri.galatea.io.GenerateHTML;
 public class TestAllParsers {
 
 	public static void main(String[] args) throws IOException {
-		String path = "target/test-classes/gsh.csv";
+		String path = "src/test/resources/gsh.csv";
 		
 		ParseCSVContext p = new ParseCSVContext(path);
 		p.parse();
@@ -41,7 +41,7 @@ public class TestAllParsers {
 		
 		GenerateHTML g1 = new GenerateHTML(c);
 		g1.generateCode();
-		g1.toFile("tmp/test.html");
+		g1.toFile("build/tmp/test.html");
 		
 		Algorithm a1 = new SimpleGSH(c);
 		a1.compute();
@@ -50,18 +50,18 @@ public class TestAllParsers {
 		
 		GenerateCOD cod = new GenerateCOD(o);
 		cod.generateCode();
-		cod.toFile("tmp/cod.xml");
+		cod.toFile("build/tmp/cod.xml");
 		
-		ParseCOD codp = new ParseCOD("tmp/cod.xml");
+		ParseCOD codp = new ParseCOD("build/tmp/cod.xml");
 		codp.parse();
 		
 		GenerateDot g2 = new GenerateDot(o);
 		g2.generateCode();
-		g2.toFile("tmp/test.dot");
+		g2.toFile("build/tmp/test.dot");
 		
 		GenerateDot g3 = new GenerateDot(codp.getConceptOrder());
 		g3.generateCode();
-		g3.toFile("tmp/cod.dot");
+		g3.toFile("build/tmp/cod.dot");
 	}
 	
 }

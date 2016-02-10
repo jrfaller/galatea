@@ -1,0 +1,14 @@
+apply plugin: 'java'
+
+repositories {
+	mavenCentral()
+	jcenter()
+}
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+dependencies {
+	testCompile 'junit:junit:4.+'
+  compile 'net.sf.opencsv:opencsv:2.3'
+}
